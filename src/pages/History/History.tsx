@@ -1,11 +1,11 @@
-import Header from '/Users/kasiadziewicka/coding-personal/inventory-app/src/components/Header/Header.tsx';
+import TopBar from "/Users/kasiadziewicka/coding-personal/inventory-app/src/components/TopBar/TopBar.tsx";
 
 const History = (): JSX.Element => {
-    return (
-        <div> 
-          <Header />
-        </div>
-     )
-}
+  return (
+    <div>
+      <TopBar />
+    </div>
+  );
+};
 
 export default History;
