@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-export const HeaderContainer = styled.div`
-    margin-left: 150px
-    `
-
 export const FormContainer = styled.div`
     border: solid black 2px;
     width: 400px;

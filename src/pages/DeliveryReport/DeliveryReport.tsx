@@ -2,6 +2,8 @@ import * as Styles from './DeliveryReport.styles.ts';
 import axios from 'axios';
 import React, { useEffect } from 'react';
 
+import Header from '/Users/kasiadziewicka/coding-personal/inventory-app/src/components/Header/Header.tsx';
+
 const DeliveryReport = (): JSX.Element => {
     useEffect(() => {
         axios
@@ -16,10 +18,7 @@ const DeliveryReport = (): JSX.Element => {
     
     return (
         <div> 
-            <Styles.HeaderContainer>
-                <h1>Pier Cafe Inventory</h1>
-            </ Styles.HeaderContainer>
-            <br />
+          <Header />
             <Styles.FormContainer >
                 <h2>Report a delivery</h2>
                 <select name="Item" />
