@@ -20,6 +20,11 @@ const base = new Airtable({ apiKey: process.env.API_KEY }).base(
   "appP9Sdory1eUNZ2G"
 );
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+})
+
 app.get("/stock", async (req, res) => {
   await base("Table 1")
     .select({
