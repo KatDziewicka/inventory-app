@@ -9,7 +9,7 @@ export default function TopBar(): JSX.Element {
       </Styles.HeaderContainer>
       <br />
       <Styles.Tabs>
-        <Link to="/delivery-report">
+        <Link to="/">
           <p>Delivery</p>
         </Link>
         <Link to="/sold-items">

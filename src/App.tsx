@@ -12,7 +12,7 @@ function App(): JSX.Element {
     <Router>
       <Routes>
         <Route
-          path="/delivery-report"
+          path="/"
           element={<DeliveryReport />}
         />
         <Route
