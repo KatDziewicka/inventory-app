@@ -1,6 +1,19 @@
 import * as Styles from './DeliveryReport.styles.ts';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 
 const DeliveryReport = (): JSX.Element => {
+    useEffect(() => {
+        axios
+          .get('https://api.airtable.com/stock')
+          .then(function (response) {
+            console.log(response)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }, []);
+    
     return (
         <div> 
             <Styles.HeaderContainer>
