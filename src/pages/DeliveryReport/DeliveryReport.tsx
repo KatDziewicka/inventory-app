@@ -7,14 +7,15 @@ const DeliveryReport = (): JSX.Element => {
 
   const handleOnClick = () => {
     getData();
-    console.log(stockData);
+    console.log(stockData[0].fields.category);
   };
 
   const getData = () => {
     axios
       .get("http://localhost:4040/stock")
       .then(function (response) {
-        setStockData(response.data);
+        const { data } = response.data;
+        setStockData(data);
       })
       .catch(function (error) {
         console.log(error);
@@ -39,11 +40,11 @@ const DeliveryReport = (): JSX.Element => {
         <button>Edit</button>
         <button onClick={handleOnClick}>Get data</button>
       </Styles.ButtonsContainer>
-      {/* <div>
-        {data.map((record) => (
-          <p>{record.fields.Category}</p>
+      <div>
+        {stockData.map((record, i) => (
+          <p key={i}>{record.fields.category}</p>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };
