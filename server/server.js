@@ -5,7 +5,7 @@ import cors from "cors";
 
 config();
 
-const port = process.env.PORT;
+const port = process.env.SERVER_PORT;
 
 Airtable.configure({
   endpointUrl: process.env.BASE_URL,
@@ -21,30 +21,30 @@ const base = new Airtable({ apiKey: process.env.API_KEY }).base(
 );
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header("Access-Control-Allow-Origin", "*");
   next();
-})
+});
 
 app.get("/stock", async (req, res) => {
-  await base("Table 1")
-    .select({
-      maxRecords: 3,
-      view: "Grid view",
-    })
-    .eachPage(
-      function page(records, fetchNextPage) {
-        records.forEach(function (record) {
-          console.log("Retrieved", record);
-        });
+  try {
+    console.log("Accessing the server");
+    const stockData = [];
+    await base("stock")
+      .select({
+        maxRecords: 10,
+        view: "Grid view",
+      })
+      .eachPage(function page(records, fetchNextPage) {
+        records.forEach((record) => stockData.push(record));
         fetchNextPage();
-      },
-      function done(err) {
-        if (err) {
-          console.error(err);
-          return;
-        }
-      }
-    );
+      });
+    res.status(200).json({
+      status: "success",
+      data: stockData,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 if (!port) {
