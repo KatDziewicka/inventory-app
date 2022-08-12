@@ -14,6 +14,7 @@ Airtable.configure({
 
 const app = express();
 
+app.use(express.json());
 app.use(cors());
 
 const base = new Airtable({ apiKey: process.env.API_KEY }).base(
@@ -44,6 +45,43 @@ app.get("/stock", async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+  }
+});
+
+app.post("/delivery", async (req, res) => {
+  try {
+    const { category, desired, isOnMenu, product, stock, updated } = req.body;
+    await base("stock").create([
+      {
+        fields: {
+          category: category,
+          product: product,
+          stock: stock,
+          desired: desired,
+          updated: updated,
+          isOnMenu: isOnMenu,
+        },
+      },
+    ]);
+    res.status(200).json({
+      status: "success",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.delete("/entry", async (req, res) => {
+  try {
+    console.log(req.body);
+    const { product } = req.body;
+    await base("stock").destroy([product]);
+    console.log("Got here");
+    res.status(200).json({
+      status: "success",
+    });
+  } catch (error) {
+    console.log(error);
   }
 });
 
